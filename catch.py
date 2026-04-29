@@ -22,8 +22,8 @@ apple_x = random.randint(0, WIDTH - apple_size)
 apple_y = 0
 apple_speed = 5
 bonus_x = random.randint(0, WIDTH - apple_size)
-bonus_y = -100  # start offscreen
-bonus_active = False  # not visible at start
+bonus_y = -100
+bonus_active = False
 score = 0
 misses = 0
 font = pygame.font.SysFont("segoeui", 40)
@@ -43,13 +43,13 @@ while running:
         basket_x -= basket_speed
     if keys[pygame.K_RIGHT] and basket_x < WIDTH - basket_width:
         basket_x += basket_speed
-        # Randomly spawn bonus item
-if not bonus_active and random.randint(1, 180) == 1:
-    bonus_active = True
-    bonus_x = random.randint(0, WIDTH - apple_size)
-    bonus_y = 0
-if bonus_active:
-    bonus_y += apple_speed
+    # Randomly spawn bonus item
+    if not bonus_active and random.randint(1, 180) == 1:
+        bonus_active = True
+        bonus_x = random.randint(0, WIDTH - apple_size)
+        bonus_y = 0
+    if bonus_active:
+        bonus_y += apple_speed
     # Move apple
     apple_y += apple_speed
     # Check catch
@@ -65,18 +65,17 @@ if bonus_active:
         misses += 1
         apple_x = random.randint(0, WIDTH - apple_size)
         apple_y = 0
-        # Check bonus catch
-if bonus_active and (basket_y < bonus_y + apple_size and
-    basket_x < bonus_x + apple_size and
-    basket_x + basket_width > bonus_x):
-    score += 2
-    bonus_active = False
-    bonus_y = -100
-
-# Check bonus miss
-if bonus_active and bonus_y > HEIGHT:
-    bonus_active = False
-    bonus_y = -100
+    # Check bonus catch
+    if bonus_active and (basket_y < bonus_y + apple_size and
+        basket_x < bonus_x + apple_size and
+        basket_x + basket_width > bonus_x):
+        score += 2
+        bonus_active = False
+        bonus_y = -100
+    # Check bonus miss
+    if bonus_active and bonus_y > HEIGHT:
+        bonus_active = False
+        bonus_y = -100
     # Game over
     if misses >= 3:
         screen.fill(BLACK)
