@@ -88,7 +88,7 @@ if bonus_active and bonus_y > HEIGHT:
     # Draw everything
     pygame.draw.rect(screen, BLUE, (basket_x, basket_y, basket_width, basket_height))
     pygame.draw.rect(screen, RED, (apple_x, apple_y, apple_size, apple_size))
-    if bonus_active:
+        if bonus_active:
     pygame.draw.rect(screen, GOLD, (bonus_x, bonus_y, apple_size, apple_size))
     # Draw score and hearts
     score_text = font.render(f"Score: {score}", True, WHITE)
